@@ -1,5 +1,13 @@
+:root{
+  --navbar:#2a0064
+  /* --myblack:linear-gradient(266deg, rgba(193,193,193,1) 38%, rgba(249,248,248,1) 91%) */
+}
+body{
+  background: #1f0047;
+}
 .App {
   text-align: center;
+  
 }
 
 .App-logo {

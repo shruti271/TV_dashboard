@@ -1,0 +1,21 @@
+@font-face {
+    font-family: Segoe;
+    src: url('../fonts/SegoeUI.ttf');
+  }
+
+.tablestyle {
+    background: "blue";
+}
+.tdblestyle {
+    background: "red";
+}
+p{    
+    /* font-family: 'Qwitcher Grypen', cursive; */
+    color:"#fff";
+}
+
+.totalnumber{
+    /* font-family: Segoe; */
+    /* 'Qwitcher Grypen', cursive; */
+
+}
