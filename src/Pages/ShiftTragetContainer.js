@@ -1,12 +1,11 @@
-import axios from "axios";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext} from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
 // import { useDispatch, useSelector } from "react-redux";
 import { ThemeContext } from "./index";
 import shruti from "../assets/shruti.jpg";
 import "../css/ProcessContainer.css";
 // import { loadSinglePhraseStart } from "../Redux/ducks/SinglePhrase";
-const ShiftTragetContainer = () => {
+const ShiftTragetContainer = (props) => {
 
   // const dispatch = useDispatch();
   // const ws = useRef(null);
@@ -70,12 +69,14 @@ const value = useContext(ThemeContext)
             fluid
           >
             {" "}
-            {value.shift}
+            {props?.value?.shift?.shift}
             {/* Shift Target */}
           </Container>
           <Container style={{ fontSize: "3vh" ,height:"5vh"}} className="totalnumber" fluid>
             {/* {singlePhase.target} */}
-            {value.target}
+            <b>
+              {props?.value?.target}
+              </b>
           </Container>
           <Container style={{ background: "#00aa8d" ,height:"5vh",fontSize:"3vh"}} fluid>
             Actual
@@ -85,7 +86,9 @@ const value = useContext(ThemeContext)
             <Col xs={4}></Col>
             <Col xs={4} style={{ fontSize: "3vh" ,height:"5vh"}} className="totalnumber">
             {/* {singlePhase.actual} */}
-            {value.actual}
+            <b>
+              {props.value.actual}
+              </b>
             </Col>
             <Col
               xs={4}
@@ -95,11 +98,12 @@ const value = useContext(ThemeContext)
                 alignItems: "end",
                 color: "#c40013",
                 // fontSize: "20px",
-                fontSize:"2vh"
+                fontSize:"2vh",
+                // fontWeight:"bold"
               }}
             >
               {/* {singlePhase.varience} */}
-              {value.varience}
+              <b>{props?.value?.varience}</b>
             </Col>
           </Row>
         </Col>
@@ -112,7 +116,7 @@ const value = useContext(ThemeContext)
             height:"100%"
           }}
         >
-          <Image src={shruti} height="100%"/>
+          <Image src={shruti} height="80%"/>
         </Col>
       </Row>
     </Container>

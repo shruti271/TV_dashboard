@@ -5,10 +5,10 @@ import { ThemeContext } from ".";
 import TableRow from "../Components/TableRow";
 import style from "../css/ProcessContainer.css";
 
-const ProcessContainer = () => {
+const ProcessContainer = (props) => {
   // const singlePhase = useSelector((state) => state.singlePhase);
 const value = useContext(ThemeContext)
-  
+  console.log("???????????????????????????????????????????????????????????????",props?.value)
 // console.log(singlePhase.wipTv)
   return (
     <>
@@ -60,7 +60,7 @@ const value = useContext(ThemeContext)
             textAlign: "center",
           }}
         >
-          {value?.wipTv?.map((data, index) => (
+          {props?.value?.map((data, index) => (
             <TableRow processData={data} key={index}/>
           ))}
         </tbody>

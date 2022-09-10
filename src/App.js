@@ -13,7 +13,7 @@ import {
 import { loadSmallMeduimStart } from "./Redux/ducks/SmallMeduim";
 import { Route, Routes } from "react-router-dom";
 import DashboardPage from "./Pages";
-import { loadLargeLineStart } from "./Redux/ducks/LargeLine";
+import { loadLargeLineStart, updateLargeLine } from "./Redux/ducks/LargeLine";
 import { loadIndustryLineStart } from "./Redux/ducks/IndustrialLine";
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
   const smallMeduim = useSelector((state) => state.smallMeduim);
   const largeLineReducer = useSelector((state) => state.largeLineReducer);
   const IndustryLineSagas = useSelector((state) => state.IndustryLineSagas);
+  const fetchTableReducer = useSelector((state) => state.fetchTableReducer);
 
   const ws = useRef(null);
 
@@ -31,25 +32,33 @@ function App() {
     );
     ws.current.onopen = (event) => {
       console.log("connection established");
+      console.log("mydata", event);
     };
     ws.current.onmessage = function (event) {
       const json = JSON.parse(event.data);
-      console.log("hyyy data", json);
+      console.log("data ininytailllll", json);
       try {
-        // add data in redux
-        if (json?.data?.shifttargets?.line?.line === "single phase") {
-          dispatch(updateSinglePhrase(json?.data));
-        }
-        switch (json?.data?.shifttargets?.line?.line) {
-          case "single phase":
-            dispatch(updateSinglePhrase(json?.data));
-            break;
-          case "small/medium":
-            dispatch(updateSinglePhrase(json?.data));
-            break;
 
-          default:
-            break;
+        // add data in redux
+        if (fetchTableReducer?.fetchTable) {
+        } else {
+          switch (json?.data?.shifttargets?.line?.line) {
+            case "single phase":
+              dispatch(updateSinglePhrase(json?.data));
+              break;
+            case "small/medium":
+              dispatch(updateSinglePhrase(json?.data));
+              break;
+            case "large":
+              dispatch(updateLargeLine(json?.data));
+              break;
+            case "industrial":
+              dispatch(loadIndustryLineStart());
+              break;
+
+            default:
+              break;
+          }
         }
       } catch (err) {
         console.log("err", err);
@@ -61,12 +70,12 @@ function App() {
     // };
   }, [ws]);
 
-  useEffect(() => {
-    dispatch(loadSinglePhraseStart());
-    dispatch(loadSmallMeduimStart());
-    dispatch(loadLargeLineStart());
-    dispatch(loadIndustryLineStart());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(loadSinglePhraseStart());
+  //   dispatch(loadSmallMeduimStart());
+  //   dispatch(loadLargeLineStart());
+  //   dispatch(loadIndustryLineStart());
+  // }, [dispatch]);
 
   return (
     <>
@@ -74,22 +83,22 @@ function App() {
         <Route
           path="/large"
           exact
-          element={<DashboardPage value={largeLineReducer} />}
+          element={<DashboardPage  />}
         />
         <Route
           path="/small"
           exact
-          element={<DashboardPage value={smallMeduim} />}
+          element={<DashboardPage  />}
         />
         <Route
           path="/single"
           exact
-          element={<DashboardPage value={singlePhase} />}
+          element={<DashboardPage  />}
         />
         <Route
           path="/industrial"
           exact
-          element={<DashboardPage value={IndustryLineSagas} />}
+          element={<DashboardPage  />}
         />
       </Routes>
     </>

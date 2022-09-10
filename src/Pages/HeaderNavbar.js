@@ -27,8 +27,7 @@ const HeaderNavbar = () => {
             fontSize: "5vh",
           }}
         >
-          {value.line}
-          {/* {singlePhase.line} */}
+          {value.line}          
         </Container>
       </Navbar>
     </>

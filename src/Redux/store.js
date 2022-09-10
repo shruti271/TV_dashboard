@@ -7,12 +7,14 @@ import logger from "redux-logger";
 import smallMeduimReducer from "./ducks/SmallMeduim";
 import largeLineReducer from "./ducks/LargeLine";
 import industryLineReducer from "./ducks/IndustrialLine";
+import fetchTableReducer from "./ducks/MagaeData";
 
 const reducer = combineReducers({
     singlePhase:singlePhraseReducer,
     smallMeduim:smallMeduimReducer,
     largeLineReducer:largeLineReducer,
-    industryLineReducer:industryLineReducer
+    industryLineReducer:industryLineReducer,
+    fetchTableReducer:fetchTableReducer
 });
 const composeEnhancers =
   window["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] || compose;

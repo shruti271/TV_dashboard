@@ -22,12 +22,7 @@ export const updateIndustryLine = (data) => ({
   payload: data,
 });
 const initialState = {
-  shift: "",
-  line: "",
-  actual: "",
-  target: 0,
-  varience: 0,
-  wipTv: [],
+  data: null,
   loading: false,
   error: "",
 };
