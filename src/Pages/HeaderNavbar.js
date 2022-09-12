@@ -1,18 +1,17 @@
-import React from "react";
-import { Container, Image, Navbar } from "react-bootstrap";
+import React, { memo } from "react";
+import { Container, Navbar } from "react-bootstrap";
 import factorylogo from "../assets/factorylogo.png";
 
-const HeaderNavbar = (props) => {
+const HeaderNavbar = (props) => {  
   return (
     <>
       <Navbar
         expand="sm"
         variant="dark" height="5wh"
-        style={{ background: "#2a0064", color: "#f0f0f0" }}
+        style={{ background: "#2a0064", color: "#f0f0f0" ,paddingLeft:3}}
       >
         <Navbar.Brand>
-          {/* <Image src={factorylogo} height="100vh"  /> */}
-          <img src={factorylogo} height="1%" />
+          <img src={factorylogo} height="40vh" alt="logo" style={{paddingLeft:"20px"}}/>
         </Navbar.Brand>
 
         <Container
@@ -30,4 +29,4 @@ const HeaderNavbar = (props) => {
   );
 };
 
-export default HeaderNavbar;
+export default memo(HeaderNavbar);// it will not render component if there is no change in current route

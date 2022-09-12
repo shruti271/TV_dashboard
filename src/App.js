@@ -10,7 +10,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadShiftStart());
+    dispatch(loadShiftStart());//load only first time when website open
   }, [dispatch]);
 
   return (

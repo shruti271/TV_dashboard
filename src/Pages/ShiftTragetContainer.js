@@ -1,12 +1,12 @@
 import React from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
-import shruti from "../assets/shruti.jpg";
+import profileImg from "../assets/profileImg.jpg";
 import "../css/ProcessContainer.css";
 import "../App.css";
 
 const ShiftTragetContainer = (props) => {
   return (
-    <Container fluid style={{color: "#f0f0f0", height: "30vh"}}>
+    <Container fluid style={{ color: "#f0f0f0", height: "30vh" }}>
       <Row
         style={{
           display: "flex",
@@ -51,7 +51,6 @@ const ShiftTragetContainer = (props) => {
               style={{ fontSize: "3vh", height: "5vh" }}
               className="totalnumber"
             >
-              {/* {singlePhase.actual} */}
               <b>{props.value.actual}</b>
             </Col>
             <Col
@@ -61,12 +60,9 @@ const ShiftTragetContainer = (props) => {
                 justifyContent: "end",
                 alignItems: "end",
                 color: "#c40013",
-                // fontSize: "20px",
                 fontSize: "2vh",
-                // fontWeight:"bold"
               }}
             >
-              
               <b>{props?.value?.varience}</b>
             </Col>
           </Row>
@@ -80,7 +76,7 @@ const ShiftTragetContainer = (props) => {
             height: "100%",
           }}
         >
-          <Image src={shruti} height="80%" />
+          <Image src={profileImg} height="80%" />
         </Col>
       </Row>
     </Container>

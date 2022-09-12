@@ -2,21 +2,22 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import TableRow from "../Components/TableRow";
 
+const mainLayOverColor="#2a0064"
+const TextColor="#f0f0f0"
+
 const ProcessContainer = (props) => {
   return (
     <>
       <Table
         style={{
-          background: "#2a0064",
-          color: "#f0f0f0",
-          height: "auto",
+          color: TextColor,
           fontSize: "2vh",
         }}
       >
         <thead
           style={{
-            background: "#2a0064",
-            borderColor: "#2a0064",
+            background: mainLayOverColor,
+            borderColor: mainLayOverColor,
             height: "4vh",
           }}
         >
@@ -36,10 +37,9 @@ const ProcessContainer = (props) => {
           </tr>
         </thead>
         <tbody
-          style={{
-            background: "#1f0047",
-            color: "#f0f0f0",
-            borderColor: "#2a0064",
+          style={{            
+            color: TextColor,
+            borderColor: mainLayOverColor,
             textAlign: "center",
           }}
         >

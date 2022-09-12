@@ -1,17 +1,10 @@
-import React, { createContext, useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadShiftStart } from "../Redux/ducks/Shift";
-import { format, isBefore } from "date-fns";
-import isAfter from "date-fns/isAfter";
 import { loadshiftTarget } from "../Redux/ducks/ShiftTarget";
 import { loadWip } from "../Redux/ducks/Wip";
-// import { loadShift } from "../Redux/ducks/Shift";
-// import { loadshiftTarget } from "../Redux/ducks/ShiftTarget";
-// import { loadWip } from "../Redux/ducks/Wip";
 import HeaderNavbar from "./HeaderNavbar";
 import ProcessContainer from "./ProcessContainer";
 import ShiftTragetContainer from "./ShiftTragetContainer";
-// export const ThemeContext = React.createContext();
 
 const TotalLines = {
   SINGLELINE: "single phase",
@@ -21,8 +14,8 @@ const TotalLines = {
 };
 
 const DashboardPage = () => {
-  const ws = useRef(null);
   const dispatch = useDispatch();
+  const ws = useRef(null);
 
   const wipReducer = useSelector((state) => state.wipReducer);
   const shiftTargetReducer = useSelector((state) => state.shiftTargetReducer);
@@ -33,10 +26,6 @@ const DashboardPage = () => {
   const [curtrentLine, setCurrentLine] = React.useState(null);
   const [cuurentShift, setCurrentShift] = React.useState(null);
 
-  // console.log("wip", wipReducer?.data);
-  // console.log("wip", shiftTargetReducer?.data);
-  // console.log("wip", shiftReducer?.data);
-
   const updatedShift = useMemo(() => cuurentShift, [cuurentShift]);
 
   const checkForCurrentShift = () => {
@@ -44,55 +33,42 @@ const DashboardPage = () => {
     const showTime =
       date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
-    let p = shiftReducer?.data?.filter((e) => {
-      // if (e.end === "00:00:00") {
-      //   return e.start <= showTime && true;
-      // } else {
-      return e.start <= showTime && e.end > showTime;
-      // }
-    });
+    let p = shiftReducer?.data?.filter((e) =>
+      e.end === "00:00:00"
+        ? e.start <= showTime && true
+        : e.start <= showTime && e.end > showTime
+    );
     setCurrentShift(p[0]?.shift);
-  };
+  };//check for current shift
+
   useEffect(() => {
     const interval = setInterval(() => {
       checkForCurrentShift();
     }, 1000);
 
     return () => clearInterval(interval);
-  });
+  });//check after evry 1 sec for checking requirement for chnaging shift
 
   useEffect(() => {
-    console.log("comeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee>>>>>>>>>>>>>>>>>>>>");
-    setTableData({
-      Wip: wipReducer.data,
-      shiftTarget: shiftTargetReducer.data,
-    });
+    wipReducer?.data &&
+      setTableData({
+        Wip: wipReducer.data,
+        shiftTarget: shiftTargetReducer.data,
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shiftReducer, updatedShift]);
+  }, [updatedShift]);//if new shift begin , it will render page
 
   const setTableData = ({ Wip, shiftTarget }) => {
     const date = new Date();
     const showTime =
       date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-      // checkForCurrentShift();
-    let p = shiftReducer?.data?.filter(
-      (e) =>
-        // {
-        // if(e.end === "00:00:00")
-        // {
-        //   console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& comeeeeeeeeeeeeeeeeeeeeeee")
-        //   return e.start <= showTime && true}
-        // else
-        //  return
-        e.start <= showTime && e.end > showTime
-      // }
-      // e.end === "00:00:00"
-      //   ? e.start <= showTime && true
-      //   : e.start <= showTime && e.end > showTime}
+    let p = shiftReducer?.data?.filter((e) =>
+      e.end === "00:00:00"
+        ? e.start <= showTime && true
+        : e.start <= showTime && e.end > showTime
     );
 
-    const setCurrentLineData=({currentLine,currentShift})=>{
-      setCurrentLine(currentLine)
+    const setCurrentLineData = ({ currentLine, currentShift }) => {
       setCurrentTarget(
         shiftTarget?.filter(
           (data) =>
@@ -107,35 +83,46 @@ const DashboardPage = () => {
             data?.shift?.shift === currentShift
         )
       );
-    }
+    };
 
     switch (window.location.pathname) {
       case "/single":
-        // setCurrentLine("Single Phase");
-        setCurrentLineData({currentLine:TotalLines.SINGLELINE, currentShift:p[0]?.shift});
+        setCurrentLine("Single Phase");
+        setCurrentLineData({
+          currentLine: TotalLines.SINGLELINE,
+          currentShift: p[0]?.shift,
+        });
         break;
       case "/small":
-        // setCurrentLine("Small/Medium");
-        setCurrentLineData({currentLine:TotalLines.SMALLMEDIUMLINE, currentShift:p[0]?.shift});
+        setCurrentLine("Small/Medium");
+        setCurrentLineData({
+          currentLine: TotalLines.SMALLMEDIUMLINE,
+          currentShift: p[0]?.shift,
+        });
         break;
       case "/large":
-        // setCurrentLine("Large");
-        setCurrentLineData({currentLine:TotalLines.LARGELINE, currentShift:p[0]?.shift});
+        setCurrentLine("Large");
+        setCurrentLineData({
+          currentLine: TotalLines.LARGELINE,
+          currentShift: p[0]?.shift,
+        });
         break;
       case "/industrial":
-        // setCurrentLine("Industrial");
-        setCurrentLineData({currentLine:TotalLines.INDUSTRIALLINE, currentShift:p[0]?.shift});
+        setCurrentLine("Industrial");
+        setCurrentLineData({
+          currentLine: TotalLines.INDUSTRIALLINE,
+          currentShift: p[0]?.shift,
+        });
         break;
 
       default:
         break;
     }
-  };
+  };//set data to page
+
   useEffect(() => {
-    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
     ws.current = new WebSocket(
-      // `${process.env.REACT_APP_WEB_SOCKET_URL}/ws/api/singlephaseline/`
-      'ws://192.168.1.16:8003/ws/api/singlephaseline/'
+      `${process.env.REACT_APP_WEB_SOCKET_URL}/ws/api/singlephaseline/`
     );
     ws.current.onopen = (event) => {
       console.log("connection established");
@@ -156,7 +143,7 @@ const DashboardPage = () => {
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ws,shiftReducer]);
+  }, [ws, shiftReducer]);//will call whenever web socket send data
 
   return (
     <>
