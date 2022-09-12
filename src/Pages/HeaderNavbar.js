@@ -7,11 +7,12 @@ const HeaderNavbar = (props) => {
     <>
       <Navbar
         expand="sm"
-        variant="dark"
+        variant="dark" height="5wh"
         style={{ background: "#2a0064", color: "#f0f0f0" }}
       >
         <Navbar.Brand>
-          <Image src={factorylogo} height="100wh" />
+          {/* <Image src={factorylogo} height="100vh"  /> */}
+          <img src={factorylogo} height="1%" />
         </Navbar.Brand>
 
         <Container

@@ -13,6 +13,13 @@ import ProcessContainer from "./ProcessContainer";
 import ShiftTragetContainer from "./ShiftTragetContainer";
 // export const ThemeContext = React.createContext();
 
+const TotalLines = {
+  SINGLELINE: "single phase",
+  SMALLMEDIUMLINE: "small/medium",
+  LARGELINE: "large",
+  INDUSTRIALLINE: "industrial",
+};
+
 const DashboardPage = () => {
   const ws = useRef(null);
   const dispatch = useDispatch();
@@ -26,9 +33,9 @@ const DashboardPage = () => {
   const [curtrentLine, setCurrentLine] = React.useState(null);
   const [cuurentShift, setCurrentShift] = React.useState(null);
 
-  console.log("wip", wipReducer?.data);
-  console.log("wip", shiftTargetReducer?.data);
-  console.log("wip", shiftReducer?.data);
+  // console.log("wip", wipReducer?.data);
+  // console.log("wip", shiftTargetReducer?.data);
+  // console.log("wip", shiftReducer?.data);
 
   const updatedShift = useMemo(() => cuurentShift, [cuurentShift]);
 
@@ -38,13 +45,13 @@ const DashboardPage = () => {
       date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
     let p = shiftReducer?.data?.filter((e) => {
-      if (e.end === "00:00:00") {
-        return e.start <= showTime && true;
-      } else {
-        return e.start <= showTime && e.end > showTime;
-      }
+      // if (e.end === "00:00:00") {
+      //   return e.start <= showTime && true;
+      // } else {
+      return e.start <= showTime && e.end > showTime;
+      // }
     });
-    setCurrentShift(p[0].shift);
+    setCurrentShift(p[0]?.shift);
   };
   useEffect(() => {
     const interval = setInterval(() => {
@@ -55,6 +62,7 @@ const DashboardPage = () => {
   });
 
   useEffect(() => {
+    console.log("comeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee>>>>>>>>>>>>>>>>>>>>");
     setTableData({
       Wip: wipReducer.data,
       shiftTarget: shiftTargetReducer.data,
@@ -66,95 +74,57 @@ const DashboardPage = () => {
     const date = new Date();
     const showTime =
       date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-
-    let p = shiftReducer?.data?.filter((e) =>
-      {
-        if(e.end === "00:00:00")
-        {
-          console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& comeeeeeeeeeeeeeeeeeeeeeee")
-          return e.start <= showTime && true}
-        else return e.start <= showTime && e.end > showTime
-      }
-        // e.end === "00:00:00"
+      // checkForCurrentShift();
+    let p = shiftReducer?.data?.filter(
+      (e) =>
+        // {
+        // if(e.end === "00:00:00")
+        // {
+        //   console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& comeeeeeeeeeeeeeeeeeeeeeee")
+        //   return e.start <= showTime && true}
+        // else
+        //  return
+        e.start <= showTime && e.end > showTime
+      // }
+      // e.end === "00:00:00"
       //   ? e.start <= showTime && true
       //   : e.start <= showTime && e.end > showTime}
     );
 
+    const setCurrentLineData=({currentLine,currentShift})=>{
+      setCurrentLine(currentLine)
+      setCurrentTarget(
+        shiftTarget?.filter(
+          (data) =>
+            data?.line?.line === currentLine &&
+            data?.shift?.shift === currentShift
+        )[0]
+      );
+      setCurrentWip(
+        Wip.filter(
+          (data) =>
+            data?.line?.line === currentLine &&
+            data?.shift?.shift === currentShift
+        )
+      );
+    }
+
     switch (window.location.pathname) {
       case "/single":
-        setCurrentLine("Single Phase");
-
-        setCurrentTarget(
-          shiftTarget?.filter(
-            (data) =>
-              data?.line?.line === "single phase" &&
-              data?.shift?.shift === p[0].shift
-          )[0]
-        );
-        let SingleWipData = [];
-        Wip?.map((data) => {
-          if (
-            data?.line?.line === "single phase" &&
-            data?.shift?.shift === p[0].shift
-          )
-            SingleWipData.push(data);
-        });
-        setCurrentWip(SingleWipData);
+        // setCurrentLine("Single Phase");
+        setCurrentLineData({currentLine:TotalLines.SINGLELINE, currentShift:p[0]?.shift});
         break;
       case "/small":
-        setCurrentLine("Small/Medium");
-        setCurrentTarget(
-          shiftTarget?.filter(
-            (data) =>
-              data.line.line === "small/medium" &&
-              data.shift.shift === p[0].shift
-          )[0]
-        );
-        let smallWipData = [];
-        Wip?.map((data) => {
-          if (
-            data.line.line === "small/medium" &&
-            data.shift.shift === p[0].shift
-          )
-            smallWipData.push(data);
-        });
-        setCurrentWip(smallWipData);
+        // setCurrentLine("Small/Medium");
+        setCurrentLineData({currentLine:TotalLines.SMALLMEDIUMLINE, currentShift:p[0]?.shift});
         break;
       case "/large":
-        setCurrentLine("Large");
-
-        setCurrentTarget(
-          shiftTarget?.filter(
-            (data) =>
-              data.line.line === "large" && data.shift.shift === p[0].shift
-          )[0]
-        );
-        let largeWipData = [];
-        Wip?.map((data) => {
-          if (data.line.line === "large" && data.shift.shift === p[0].shift)
-            largeWipData.push(data);
-        });
-        setCurrentWip(largeWipData);
-        setCurrentLine(largeWipData[0].line.line);
+        // setCurrentLine("Large");
+        setCurrentLineData({currentLine:TotalLines.LARGELINE, currentShift:p[0]?.shift});
         break;
       case "/industrial":
-        setCurrentLine("Industrial");
-
-        setCurrentTarget(
-          shiftTarget?.filter(
-            (data) =>
-              data.line.line === "industrial" && data.shift.shift === p[0].shift
-          )[0]
-        );
-        let inudtryWipData = [];
-        Wip?.map((data) => {
-          if (
-            data.line.line === "industrial" &&
-            data.shift.shift === p[0].shift
-          )
-            inudtryWipData.push(data);
-        });
-        setCurrentWip(inudtryWipData);
+        // setCurrentLine("Industrial");
+        setCurrentLineData({currentLine:TotalLines.INDUSTRIALLINE, currentShift:p[0]?.shift});
         break;
 
       default:
@@ -162,8 +132,10 @@ const DashboardPage = () => {
     }
   };
   useEffect(() => {
+    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
     ws.current = new WebSocket(
-      `ws://192.168.1.16:8003/ws/api/singlephaseline/`
+      // `${process.env.REACT_APP_WEB_SOCKET_URL}/ws/api/singlephaseline/`
+      'ws://192.168.1.16:8003/ws/api/singlephaseline/'
     );
     ws.current.onopen = (event) => {
       console.log("connection established");
@@ -174,16 +146,17 @@ const DashboardPage = () => {
       try {
         dispatch(loadshiftTarget(json?.data?.shifttargets));
         dispatch(loadWip(json?.data?.wipTv));
-        setTableData({
-          Wip: json?.data?.wipTv,
-          shiftTarget: json?.data?.shifttargets,
-        });
+        shiftReducer.data &&
+          setTableData({
+            Wip: json?.data?.wipTv,
+            shiftTarget: json?.data?.shifttargets,
+          });
       } catch (err) {
         console.log("err", err);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ws, shiftReducer]);
+  }, [ws,shiftReducer]);
 
   return (
     <>
