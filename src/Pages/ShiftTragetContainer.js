@@ -1,94 +1,58 @@
-import React, { useContext} from "react";
+import React from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
-// import { useDispatch, useSelector } from "react-redux";
-import { ThemeContext } from "./index";
 import shruti from "../assets/shruti.jpg";
 import "../css/ProcessContainer.css";
-// import { loadSinglePhraseStart } from "../Redux/ducks/SinglePhrase";
+import "../App.css";
+
 const ShiftTragetContainer = (props) => {
-
-  // const dispatch = useDispatch();
-  // const ws = useRef(null);
-const value = useContext(ThemeContext)
-  
-  // const singlePhase = useSelector((state) => state.singlePhase);
-
-  
-  // const abc = async () => {
-  //   const data = await axios.get(
-  //     // `http://192.168.1.16:8003/tvapi/singlephaseline/`
-  //     `http://192.168.1.16:8003/tvapi/singlephaseline/`
-  //   );
-  //   console.log(data);
-  // };
-  // useEffect(() => {
-  //   abc();
-  // });
-  // useEffect(()=>{
-  //   // dispatch(loadSinglePhraseStart());
-  // },[dispatch]);
-
-  // useEffect(() => {
-  //   ws.current = new WebSocket(
-  //     // `ws://192.168.1.16:8003/tvapi/singlephaseline/?shift=shift1`
-  //     // http://127.0.0.1:8003/tvapi/singlephaseline/?shift=shift1
-  //     `ws://192.168.1.16:8003/ws/api/singlephaseline/`
-  //   );
-  //   ws.current.onopen = (event) => {
-  //     console.log("connection established");
-  //   };
-  //   ws.current.onmessage = function (event) {
-  //     const json = JSON.parse(event.data);
-  //     console.log("hyyy data", json);
-  //     try {
-  //       // add data in redux
-  //       // if()
-  //     } catch (err) {
-  //       console.log("err", err);
-  //     }
-  //   };
-  //   // return () => {
-  //   //   ws.current?.close();
-  //   //   console.log("connection closed");
-  //   // };
-  // }, [ws]);
-
   return (
-    <Container fluid style={{ color: "#f0f0f0",height:"30vh" }}>
+    <Container fluid style={{color: "#f0f0f0", height: "30vh"}}>
       <Row
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height:"100%"
+          height: "100%",
         }}
       >
         <Col style={{ textAlign: "center", paddingLeft: 0, paddingRight: 0 }}>
           <Container
-            style={{ background: "#ffd61d", color: "black" ,height:"5vh",fontSize:"4vh", display:"flex",justifyContent:"center",alignItems:"center"}}
+            style={{
+              background: "#ffd61d",
+              color: "black",
+              height: "5vh",
+              fontSize: "4vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
             fluid
           >
-            {" "}
             {props?.value?.shift?.shift}
-            {/* Shift Target */}
           </Container>
-          <Container style={{ fontSize: "3vh" ,height:"5vh"}} className="totalnumber" fluid>
-            {/* {singlePhase.target} */}
-            <b>
-              {props?.value?.target}
-              </b>
+          <Container
+            style={{ fontSize: "3vh", height: "5vh" }}
+            className="totalnumber"
+            fluid
+          >
+            <b>{props?.value?.target}</b>
           </Container>
-          <Container style={{ background: "#00aa8d" ,height:"5vh",fontSize:"3vh"}} fluid>
+          <Container
+            style={{ background: "#00aa8d", height: "5vh", fontSize: "3vh" }}
+            fluid
+          >
             Actual
           </Container>
 
           <Row>
             <Col xs={4}></Col>
-            <Col xs={4} style={{ fontSize: "3vh" ,height:"5vh"}} className="totalnumber">
-            {/* {singlePhase.actual} */}
-            <b>
-              {props.value.actual}
-              </b>
+            <Col
+              xs={4}
+              style={{ fontSize: "3vh", height: "5vh" }}
+              className="totalnumber"
+            >
+              {/* {singlePhase.actual} */}
+              <b>{props.value.actual}</b>
             </Col>
             <Col
               xs={4}
@@ -98,11 +62,11 @@ const value = useContext(ThemeContext)
                 alignItems: "end",
                 color: "#c40013",
                 // fontSize: "20px",
-                fontSize:"2vh",
+                fontSize: "2vh",
                 // fontWeight:"bold"
               }}
             >
-              {/* {singlePhase.varience} */}
+              
               <b>{props?.value?.varience}</b>
             </Col>
           </Row>
@@ -113,10 +77,10 @@ const value = useContext(ThemeContext)
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height:"100%"
+            height: "100%",
           }}
         >
-          <Image src={shruti} height="80%"/>
+          <Image src={shruti} height="80%" />
         </Col>
       </Row>
     </Container>

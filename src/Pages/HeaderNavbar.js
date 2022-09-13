@@ -1,13 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Container, Image, Navbar } from "react-bootstrap";
-// import { useSelector } from "react-redux";
-import { ThemeContext } from "./index";
 import factorylogo from "../assets/factorylogo.png";
 
-const HeaderNavbar = () => {
-  // const singlePhase = useSelector((state) => state.singlePhase);
-  const value = useContext(ThemeContext);
-  console.log("9999999999999999999", value);
+const HeaderNavbar = (props) => {
   return (
     <>
       <Navbar
@@ -27,7 +22,7 @@ const HeaderNavbar = () => {
             fontSize: "5vh",
           }}
         >
-          {value.line}          
+          {props.value}
         </Container>
       </Navbar>
     </>

@@ -1,45 +1,45 @@
-// export const LARGE_LINE_START = "LARGE_LINE_START";
-// export const LARGE_LINE_ERROR = "LARGE_LINE_ERROR";
+export const SHIFT_START = "SHIFT_START";
+export const SHIFT_SUCCESS = "SHIFT_SUCCESS";
+export const SHIFT_ERROR = "SHIFT_ERROR";
 
-export const GET_SHIFT = "GET_SHIFT";
-
-export const loadShift = (data) => ({
-  type: GET_SHIFT,
-  payload:data
+export const loadShiftStart = () => ({
+  type: SHIFT_START,
+});
+export const loadShiftSuccess = (data) => ({
+  type: SHIFT_SUCCESS,
+  payload: data,
+});
+export const loadShiftError = (data) => ({
+  type: SHIFT_ERROR,
+  payload: data,
 });
 
-// export const loadLargeLineSuccess = (data) => ({
-//   type: LARGE_LINE_SUCCESS,
-//   payload: data,
-// });
-
-// export const loadLargeLineError = (error) => ({
-//   type: LARGE_LINE_ERROR,
-//   payload: error,
-// });
-// export const updateLargeLine = (data) => ({
-//   type: LARGE_LINE_UPDATE,
-//   payload: data,
-// });
 const initialState = {
-    data:null,
-//   shift: "",
-//   line: "",
-//   actual: "",
-//   target: 0,
-//   varience: 0,
-//   wipTv: [],
+  data: null,
   loading: false,
   error: "",
 };
 
 const shiftReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_SHIFT:
+    case SHIFT_START:
       return {
+        ...state,
+        loading: true,
+      };
+    case SHIFT_SUCCESS:
+      return {
+        ...state,
+        loading:false,
         data: action.payload,
       };
-    
+    case SHIFT_ERROR:
+      return {
+        ...state,
+        loading:false,
+        error: action.payload,
+      };
+
     default:
       return state;
   }
