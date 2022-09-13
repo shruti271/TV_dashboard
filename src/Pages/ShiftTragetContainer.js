@@ -7,7 +7,7 @@ import "../App.css";
 
 const ShiftTragetContainer = (props) => {
   return (
-    <Container fluid style={{ color: "#f0f0f0", height: "30vh",fontFamily:"Segoe UI" }}>
+    <Container fluid style={{ color: "#f0f0f0", height: "35%" }}>
       <Row
         style={{
           display: "flex",
@@ -16,48 +16,72 @@ const ShiftTragetContainer = (props) => {
           height: "100%",
         }}
       >
-        <Col style={{ textAlign: "center", paddingLeft: 0, paddingRight: 0 }}>
-          <Container
+        <Col
+          style={{
+            textAlign: "center",
+            paddingLeft: 0,
+            paddingRight: 0,
+            height: "100%",
+            display:"flex",
+            flexDirection:"column",
+            justifyContent:"center"
+          }}
+        >
+          <div
             style={{
               background: "#ffd61d",
               color: "black",
-              height: "5vh",
+              height: "15%",
               fontSize: "4vh",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              fontFamily:"Bebas Neue !important"
+              fontFamily: "Segoe UI",
             }}
-            fluid
+            // fluid
           >
             {props?.value?.shift?.shift}
-          </Container>
-          <Container
-  
-            style={{ fontSize: "3.5vh", height: "5vh"}}
-            className="totalnumber"
-            fluid
+          </div>
+          <div
+            style={{
+              // fontSize: "3vh",
+              height: "25%",
+              fontFamily: "Bebas Neue",
+              display:"flex",
+              alignItems:"center",
+              justifyContent:"center",
+              fontSize: "6vh",
+            }}
           >
-            <b>{props?.value?.target}</b>
-          </Container>
-          <Container
-            style={{ background: "#00aa8d", height: "5vh", fontSize: "3vh" ,
-            // fontFamily: "Segoe UI !important"
-          }}
-            fluid
+          {props?.value?.target}
+          </div>
+          <div
+            style={{
+              background: "#00aa8d",
+              height: "15%",
+              fontSize: "4vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontFamily: "Segoe UI",
+            }}
           >
             Actual
-          </Container>
+          </div>
 
-          <Row>
+          <Row style={{ height: "25%" }}>
             <Col xs={4}></Col>
             <Col
               xs={4}
-              style={{ fontSize: "4vh", height: "5vh",                fontFamily:"Bebas Neue !important"
-            }}
+              style={{
+                // fontSize: "3vh",
+                height: "5vh",
+                fontFamily: "Bebas Neue",
+                fontSize: "6vh",
+              }}
               className="totalnumber"
             >
-              <span  >{props.value.actual}</span>
+              <span>{props.value.actual}</span>
             </Col>
             <Col
               xs={4}
@@ -66,12 +90,11 @@ const ShiftTragetContainer = (props) => {
                 justifyContent: "end",
                 alignItems: "end",
                 color: "#c40013",
-                fontSize: "2.8vh",
-                // fontfamily: "Bebas Neue  !important"
-                fontFamily:"Bebas Neue !important"
+                fontFamily: "Bebas Neue",
+                fontSize: "4vh",
               }}
             >
-              <b>{props?.value?.varience}</b>
+              {props?.value?.varience}
             </Col>
           </Row>
         </Col>

@@ -18,12 +18,24 @@
 }
 
 body {
+  /* height: 100vh; */
   margin: 0;
-  font-family: "Segoe UI";
-  /* font-family: "Bebas Neue" !important; */
+  -webkit-font-smoothing: antialiased;
+  /* transform: translate(-50%, -51%); */
+ -moz-osx-font-smoothing: grayscale;
+ /* transform: translate(calc(-50% + 0.5px), calc(-50% + 0.5px)); */
+  /* font-family: "Segoe UI" !important; */
   /* -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
 }
+
+#root{
+  height: 100vh;
+}
+
+/* .table>:not(caption)>*>* {
+  padding:0 !important
+} */
 
 /* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

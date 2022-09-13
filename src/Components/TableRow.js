@@ -3,8 +3,6 @@ import React from "react";
 
 const cellStyle={
   padding:"1vh",
-
-
 }
 const TableRow=(props)=> {
   return (

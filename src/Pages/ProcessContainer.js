@@ -11,39 +11,38 @@ const ProcessContainer = (props) => {
       <Table
         style={{
           color: TextColor,
-          fontSize: "2.5vh",          
-          fontfamily: "Segoe UI"
+          fontSize: "2vh",
+          fontFamily:"Segoe UI",
+          height:"55%",
+          textAlign: "center",
         }}
+        size="sm"
       >
         <thead
           style={{
             background: mainLayOverColor,
             borderColor: mainLayOverColor,
-            height: "4vh",
+            fontSize: "160%",
           }}
         >
           <tr>
             <th
               style={{
                 width: "40%",
-                marginRight: 6,
-                textAlign: "center",
+                marginRight: 4,
                 borderRight: "10px solid #1f0047",
               }}
             >
-              Process
+              <span>Process</span>
             </th>
-            {/* <hr /> */}
-            <th style={{ textAlign: "center" }}>WIP</th>
+            <th>WIP</th>
           </tr>
         </thead>
         <tbody
           style={{            
             color: TextColor,
             borderColor: mainLayOverColor,            
-            
             textAlign: "center",
-  
           }}
         >
           {props?.value?.map((data, index) => (
