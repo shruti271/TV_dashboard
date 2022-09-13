@@ -11,7 +11,8 @@ const ProcessContainer = (props) => {
       <Table
         style={{
           color: TextColor,
-          fontSize: "2vh",
+          fontSize: "2.5vh",          
+          fontfamily: "Segoe UI"
         }}
       >
         <thead
@@ -39,8 +40,10 @@ const ProcessContainer = (props) => {
         <tbody
           style={{            
             color: TextColor,
-            borderColor: mainLayOverColor,
+            borderColor: mainLayOverColor,            
+            
             textAlign: "center",
+  
           }}
         >
           {props?.value?.map((data, index) => (

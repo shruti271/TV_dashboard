@@ -3,10 +3,11 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 import profileImg from "../assets/profileImg.jpg";
 import "../css/ProcessContainer.css";
 import "../App.css";
+// import "../../src/index.css"
 
 const ShiftTragetContainer = (props) => {
   return (
-    <Container fluid style={{ color: "#f0f0f0", height: "30vh" }}>
+    <Container fluid style={{ color: "#f0f0f0", height: "30vh",fontFamily:"Segoe UI" }}>
       <Row
         style={{
           display: "flex",
@@ -25,20 +26,24 @@ const ShiftTragetContainer = (props) => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              fontFamily:"Bebas Neue !important"
             }}
             fluid
           >
             {props?.value?.shift?.shift}
           </Container>
           <Container
-            style={{ fontSize: "3vh", height: "5vh" }}
+  
+            style={{ fontSize: "3.5vh", height: "5vh"}}
             className="totalnumber"
             fluid
           >
             <b>{props?.value?.target}</b>
           </Container>
           <Container
-            style={{ background: "#00aa8d", height: "5vh", fontSize: "3vh" }}
+            style={{ background: "#00aa8d", height: "5vh", fontSize: "3vh" ,
+            // fontFamily: "Segoe UI !important"
+          }}
             fluid
           >
             Actual
@@ -48,10 +53,11 @@ const ShiftTragetContainer = (props) => {
             <Col xs={4}></Col>
             <Col
               xs={4}
-              style={{ fontSize: "3vh", height: "5vh" }}
+              style={{ fontSize: "4vh", height: "5vh",                fontFamily:"Bebas Neue !important"
+            }}
               className="totalnumber"
             >
-              <b>{props.value.actual}</b>
+              <span  >{props.value.actual}</span>
             </Col>
             <Col
               xs={4}
@@ -60,7 +66,9 @@ const ShiftTragetContainer = (props) => {
                 justifyContent: "end",
                 alignItems: "end",
                 color: "#c40013",
-                fontSize: "2vh",
+                fontSize: "2.8vh",
+                // fontfamily: "Bebas Neue  !important"
+                fontFamily:"Bebas Neue !important"
               }}
             >
               <b>{props?.value?.varience}</b>

@@ -19,7 +19,8 @@
 
 body {
   margin: 0;
-  font-family: "Segoe UI" !important;
+  font-family: "Segoe UI";
+  /* font-family: "Bebas Neue" !important; */
   /* -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
 }
