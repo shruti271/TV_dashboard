@@ -30,8 +30,9 @@ const DashboardPage = () => {
   wsConn.onmessage = function (event) {
     const json = JSON.parse(event.data);
     try {
-      dispatch(loadshiftTarget(json?.data?.shifttargets));
-      dispatch(loadWip(json?.data?.wipTv));
+      dispatch(loadshiftTarget(json?.data?.shift_targets));
+      dispatch(loadWip(json?.data?.wip
+        ));
     } catch (err) {
       console.log("err", err);
     }
@@ -67,7 +68,8 @@ const DashboardPage = () => {
 
   useEffect(()=>{
     console.log("cuurentShift UseEffect",cuurentShift);
-    console.log(wipReducer);
+    console.log("curtrentLine UseEffect",curtrentLine);
+    console.log(shiftTargetReducer);
     console.log("Filtered shiftTargetReducer :",shiftTargetReducer?.data?.filter(
       (data) =>
         data?.line?.line === curtrentLine &&

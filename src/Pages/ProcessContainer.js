@@ -13,7 +13,7 @@ const ProcessContainer = (props) => {
           color: TextColor,
           fontSize: "2vh",
           fontFamily:"Segoe UI",
-          height:"55%",
+          // height:"55%",
           textAlign: "center",
         }}
         size="sm"
@@ -43,6 +43,7 @@ const ProcessContainer = (props) => {
             color: TextColor,
             borderColor: mainLayOverColor,            
             textAlign: "center",
+            // height:"100%",
           }}
         >
           {props?.value?.map((data, index) => (
