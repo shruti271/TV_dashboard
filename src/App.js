@@ -4,9 +4,10 @@ import DashboardPage from "./Pages";
 import "./App.css";
 import { loadShiftStart } from "./Redux/ducks/Shift";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect} from "react";
 
 function App() {
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/single" exact element={<DashboardPage />} />
         <Route path="/industrial" exact element={<DashboardPage />} />
       </Routes>
+      
     </>
   );
 }

@@ -6,6 +6,7 @@ import "../App.css";
 // import "../../src/index.css"
 
 const ShiftTragetContainer = (props) => {
+  console.log("props:", props);
   return (
     <Container fluid style={{ color: "#f0f0f0", height: "35%" }}>
       <Row

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useRef } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
@@ -7,14 +7,24 @@ import { Provider } from "react-redux";
 import store from "./Redux/store";
 import { BrowserRouter as Router } from "react-router-dom";
 
-// import './fonts/segoe-ui/Segoe-UI-Italic.ttf'; 
+export const wsContext = createContext();
+
+const ws = new WebSocket(
+  `${process.env.REACT_APP_WEB_SOCKET_URL}/ws/api/singlephaseline/`
+);
+
+ws.onopen = (event) => {
+  console.log("connection established");
+};
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
+    <wsContext.Provider value={ws}>
     <Provider store={store}>
       <App />
     </Provider>
+    </wsContext.Provider>
   </Router>
 );
 
