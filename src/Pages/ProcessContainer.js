@@ -5,7 +5,7 @@ import TableRow from "../Components/TableRow";
 const mainLayOverColor="#2a0064"
 const TextColor="#f0f0f0"
 
-const ProcessContainer = (props) => {
+const ProcessContainer = (props) => {  
   return (
     <>
       <Table

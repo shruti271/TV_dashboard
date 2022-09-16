@@ -38,15 +38,8 @@ const DashboardPage = () => {
     String(date.getMinutes()).padStart(2, "0") +
     ":" +
     String(date.getSeconds()).padStart(2, "0");
-    console.log(showTime)
+    // console.log(showTime)
     let p = shiftReducer?.data?.filter((e) => {
-      console.log(
-        e.start,
-        e.end,
-        showTime,
-        e.start <= showTime,
-        e.end > showTime
-      );
       return (e.start <= showTime && (e.end === "23:59:59"? e.end >= showTime : e.end > showTime));
     });
 
@@ -82,13 +75,6 @@ const DashboardPage = () => {
       String(date.getSeconds()).padStart(2, "0");
 
     let p = shiftReducer?.data?.filter((e) => {
-      console.log(
-        e.start,
-        e.end,
-        showTime,
-        e.start <= showTime,
-        e.end > showTime
-      );
       return (e.start <= showTime && (e.end === "23:59:59"? e.end >= showTime : e.end > showTime));
 
     });

@@ -3,6 +3,7 @@ import { Container, Navbar } from "react-bootstrap";
 import factorylogo from "../assets/factorylogo.png";
 
 const HeaderNavbar = (props) => {  
+  console.log("11111111111111111111111 in header")
   return (
     <>
       <Navbar
