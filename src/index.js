@@ -7,24 +7,24 @@ import { Provider } from "react-redux";
 import store from "./Redux/store";
 import { BrowserRouter as Router } from "react-router-dom";
 
-export const wsContext = createContext();
+// export const wsContext = createContext();
 
-const ws = new WebSocket(
-  `${process.env.REACT_APP_WEB_SOCKET_URL}/ws/api/singlephaseline/`
-);
+// const ws = new WebSocket(
+//   `${process.env.REACT_APP_WEB_SOCKET_URL}/ws/api/singlephaseline/`
+// );
 
-ws.onopen = (event) => {
-  console.log("connection established");
-};
+// ws.onopen = (event) => {
+//   console.log("connection established");
+// };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
-    <wsContext.Provider value={ws}>
+    {/* <wsContext.Provider value={ws}> */}
     <Provider store={store}>
       <App />
     </Provider>
-    </wsContext.Provider>
+    {/* </wsContext.Provider> */}
   </Router>
 );
 
