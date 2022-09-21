@@ -3,7 +3,6 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 import profileImg from "../assets/profileImg.jpg";
 import "../css/ProcessContainer.css";
 import "../App.css";
-// import "../../src/index.css"
 
 const ShiftTragetContainer = (props) => {
   console.log("props:", props);

@@ -1,11 +1,7 @@
-import axios from "axios";
-import React, { useContext, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
+import React, {  useEffect, useMemo } from "react";
+import {  useSelector } from "react-redux";
 // import { wsContext } from "..";
-import { loadLineStart } from "../Redux/ducks/Line";
-import { loadshiftTarget } from "../Redux/ducks/ShiftTarget";
-import { loadWip } from "../Redux/ducks/Wip";
-import { requestGetLine } from "../Redux/sagas/requests/Line";
 import { requestLineData } from "../Services/Services";
 import HeaderNavbar from "./HeaderNavbar";
 import ProcessContainer from "./ProcessContainer";
@@ -19,19 +15,15 @@ const TotalLines = {
 };
 
 const DashboardPage = () => {
-  const dispatch = useDispatch();
   // const wsConn = useContext(wsContext);
-
-  // const wipReducer = useSelector((state) => state.wipReducer);
-  // const shiftTargetReducer = useSelector((state) => state.shiftTargetReducer);
   const shiftReducer = useSelector((state) => state.shiftReducer);
   // const {data} = useSelector((state) => state.lineReducer);
 
   const [curtrentWip, setCurrentWip] = React.useState(null);
   const [curtrentTarget, setCurrentTarget] = React.useState(null);
   const [curtrentLine, setCurrentLine] = React.useState(null);
-  const [cuurentShift, setCurrentShift] = React.useState(null);
-
+  const [cuurentShift, setCurrentShift] = React.useState();
+  
   // Set WIP Process & Target Info when some change in database
   // wsConn.onmessage = function (event) {
   //   const json = JSON.parse(event.data);
@@ -103,9 +95,9 @@ const DashboardPage = () => {
   useEffect(() => {
     console.log("cuurentShift UseEffect", cuurentShift);
     console.log("curtrentLine UseEffect", curtrentLine);
-    ReFetchData();
+    cuurentShift && ReFetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [curtrentLine, shiftReducer, cuurentShift]);
+  }, [cuurentShift]);
 
   useEffect(() => {
     switch (window.location.pathname) {
