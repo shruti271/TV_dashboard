@@ -1,9 +1,12 @@
-import React, { useContext, useEffect} from "react";
+import axios from "axios";
+import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { wsContext } from "..";
 import { loadLineStart } from "../Redux/ducks/Line";
 import { loadshiftTarget } from "../Redux/ducks/ShiftTarget";
 import { loadWip } from "../Redux/ducks/Wip";
+import { requestGetLine } from "../Redux/sagas/requests/Line";
+import { requestLineData } from "../Services/Services";
 import HeaderNavbar from "./HeaderNavbar";
 import ProcessContainer from "./ProcessContainer";
 import ShiftTragetContainer from "./ShiftTragetContainer";
@@ -22,7 +25,7 @@ const DashboardPage = () => {
   // const wipReducer = useSelector((state) => state.wipReducer);
   // const shiftTargetReducer = useSelector((state) => state.shiftTargetReducer);
   const shiftReducer = useSelector((state) => state.shiftReducer);
-  const {data} = useSelector((state) => state.lineReducer);
+  // const {data} = useSelector((state) => state.lineReducer);
 
   const [curtrentWip, setCurrentWip] = React.useState(null);
   const [curtrentTarget, setCurrentTarget] = React.useState(null);
@@ -44,74 +47,72 @@ const DashboardPage = () => {
   //check for current shift
   const checkForCurrentShift = () => {
     const date = new Date();
-  
-    const showTime =String(date.getHours()).padStart(2, "0") +
-    ":" +
-    String(date.getMinutes()).padStart(2, "0") +
-    ":" +
-    String(date.getSeconds()).padStart(2, "0");
+
+    const showTime =
+      String(date.getHours()).padStart(2, "0") +
+      ":" +
+      String(date.getMinutes()).padStart(2, "0") +
+      ":" +
+      String(date.getSeconds()).padStart(2, "0");
 
     let p = shiftReducer?.data?.filter((e) => {
-      return (e.start <= showTime && (e.end === "23:59:59"? e.end >= showTime : e.end > showTime));
+      return (
+        e.start <= showTime &&
+        (e.end === "23:59:59" ? e.end >= showTime : e.end > showTime)
+      );
     });
-console.log(showTime)
     setCurrentShift(p[0]?.shift);
-  }; 
+  };
 
   //check after evry 1 sec for checking requirement for chnaging shift
   useEffect(() => {
-    const interval = setInterval(() => {
+    const checkingShiftInterval = setInterval(() => {
       checkForCurrentShift();
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(checkingShiftInterval);
   });
   //check after evry 5 min for checking requirement for chnaging shift
   useEffect(() => {
-    const interval = setInterval(() => {
-      dispatch(loadLineStart())
+    const reFetchDataInterval = setInterval(() => {
+      // dispatch(loadLineStart())
+      ReFetchData();
     }, 300000);
-
-    return () => clearInterval(interval);
+    return () => clearInterval(reFetchDataInterval);
   });
+  
+  const ReFetchData = () => {
+    requestLineData().then((e) => {
+        setCurrentTarget(
+          e?.data?.data?.shift_targets?.filter(
+            (data) =>
+              data?.line?.line === curtrentLine?.toLowerCase() &&
+              data?.shift?.shift === cuurentShift
+          )[0]
+        );
+        setCurrentWip(
+          e.data.data?.wipTv?.filter(
+            (data) =>
+              data?.line?.line === curtrentLine?.toLowerCase() &&
+              data?.shift?.shift === cuurentShift
+          )
+        );
+      });
+  };
 
-useEffect(()=>{
-  dispatch(loadLineStart())
-},[])
+  useEffect(() => {
+    console.log("cuurentShift UseEffect", cuurentShift);
+    console.log("curtrentLine UseEffect", curtrentLine);
+    ReFetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [curtrentLine, shiftReducer, cuurentShift]);
 
-  useEffect(()=>{
-    console.log("cuurentShift UseEffect",cuurentShift);
-    console.log("curtrentLine UseEffect",curtrentLine);
-    console.log("9999999",data.Traget);
-    console.log("9999999--- wip",data.Wip);
-    console.log("Filtered shiftTargetReducer :",data?.Traget?.filter(
-      (data) =>
-        data?.line?.line === curtrentLine.toLowerCase() &&
-        data?.shift?.shift === cuurentShift
-    )[0])
-    setCurrentTarget(
-      data?.Traget?.filter(
-        (data) =>
-          data?.line?.line === curtrentLine.toLowerCase() &&
-          data?.shift?.shift === cuurentShift
-      )[0]
-    );
-    setCurrentWip(
-      data?.Wip?.filter(
-        (data) =>
-          data?.line?.line === curtrentLine.toLowerCase() &&
-          data?.shift?.shift === cuurentShift
-      )
-    );
-
-  },[curtrentLine, shiftReducer, cuurentShift, data.Wip,data.Traget])
-
-  useEffect(()=>{
+  useEffect(() => {
     switch (window.location.pathname) {
       case "/single":
         setCurrentLine(TotalLines.SINGLELINE);
         break;
-      case "/small&medium":
+      case "/small":
         setCurrentLine(TotalLines.SMALLMEDIUMLINE);
         break;
       case "/large":
@@ -123,14 +124,13 @@ useEffect(()=>{
       default:
         break;
     }
-  },[window.location.pathname])
+  }, []);
 
-  useEffect(()=>{
-    console.log(curtrentLine);
-    console.log(curtrentTarget);
-    console.log(curtrentWip);
-  },[curtrentLine, curtrentTarget, curtrentWip])
-
+  // useEffect(() => {
+  //   console.log(curtrentLine);
+  //   console.log(curtrentTarget);
+  //   console.log(curtrentWip);
+  // }, [curtrentLine, curtrentTarget, curtrentWip]);
 
   return (
     <>

@@ -5,13 +5,13 @@ import logger from "redux-logger";
 // import shiftTargetReducer from "./ducks/ShiftTarget";
 // import wipReducer from "./ducks/Wip";
 import shiftReducer from "./ducks/Shift";
-import lineReducer from "./ducks/Line";
+// import lineReducer from "./ducks/Line";
 
 const reducer = combineReducers({
   // wipReducer: wipReducer,
   shiftReducer: shiftReducer,
   // shiftTargetReducer: shiftTargetReducer,
-  lineReducer:lineReducer
+  // lineReducer:lineReducer
 });
 const composeEnhancers =
   window["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] || compose;
