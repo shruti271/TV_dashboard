@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import React, { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadshiftTarget } from "../Redux/ducks/ShiftTarget";
@@ -50,7 +49,6 @@ const DashboardPage = () => {
       );
       return (e.start <= showTime && (e.end === "23:59:59"? e.end >= showTime : e.end > showTime));
     });
-    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ppppppppp ", showTime, p);
 
     setCurrentShift(p[0]?.shift);
   }; //check for current shift
