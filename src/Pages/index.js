@@ -40,10 +40,6 @@ const DashboardPage = () => {
     ":" +
     String(date.getSeconds()).padStart(2, "0");
     console.log(showTime)
-    
-
-      // date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    // console.log("))))))))")
     let p = shiftReducer?.data?.filter((e) => {
       console.log(
         e.start,
@@ -52,11 +48,6 @@ const DashboardPage = () => {
         e.start <= showTime,
         e.end > showTime
       );
-
-      // var sdate = new Date().toTimeString(e.start);
-      // var edate = new Date().toTimeString(e.end);
-      // return sdate <= showTime && edate >= showTime;
-      // return e.start <= showTime && e.end > showTime;
       return (e.start <= showTime && (e.end === "23:59:59"? e.end >= showTime : e.end > showTime));
     });
     console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ppppppppp ", showTime, p);
@@ -84,21 +75,13 @@ const DashboardPage = () => {
   const setTableData = ({ Wip, shiftTarget }) => {
     const date = new Date();
 
-    var sdate = new Date();
-
-    console.log(
-      "ajsdoihaidsauidgtsyufdsydfsydvgfc++++++++++++++++++",
-      String(sdate.getMinutes()).padStart(2, "0")
-    );
+   
     var showTime =
       String(date.getHours()).padStart(2, "0") +
       ":" +
       String(date.getMinutes()).padStart(2, "0") +
       ":" +
       String(date.getSeconds()).padStart(2, "0");
-
-    // const showTime =
-    // date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
     let p = shiftReducer?.data?.filter((e) => {
       console.log(
@@ -108,17 +91,9 @@ const DashboardPage = () => {
         e.start <= showTime,
         e.end > showTime
       );
-      // var sdate = new Date().toTimeString(e.start);
-      // var edate = new Date().toTimeString(e.end);
-
-      // return sdate <= showTime && edate > showTime;
-      // return e.start <= showTime && e.end > showTime;
-      // return e.start <= showTime &&  e.end === "23:59:59"? e.end >= showTime:e.end > showTime;
       return (e.start <= showTime && (e.end === "23:59:59"? e.end >= showTime : e.end > showTime));
 
-// 
     });
-    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ppppppppp ", showTime, p);
 
     const setCurrentLineData = ({ currentLine, currentShift }) => {
       setCurrentTarget(
