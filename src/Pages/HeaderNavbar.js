@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { Container, Navbar } from "react-bootstrap";
 import factorylogo from "../assets/factorylogo.png";
 
@@ -29,4 +29,4 @@ const HeaderNavbar = (props) => {
   );
 };
 
-export default memo(HeaderNavbar);// it will not render component if there is no change in current route
+export default React.memo(HeaderNavbar);// it will not render component if there is no change in current route

@@ -28,15 +28,23 @@ const shiftReducer = (state = initialState, action) => {
         loading: true,
       };
     case SHIFT_SUCCESS:
+      const a = action.payload.map((d) => {        
+        if (d.end === "00:00:00") {
+          d.end = "23:59:59";
+        }
+      //   if(d.start=== "00:00:00")   d.start = "23:59:59";
+        return d;
+      });
+      console.log("||||||||||||||||||||", a);
       return {
         ...state,
-        loading:false,
-        data: action.payload,
+        loading: false,
+        data: a,
       };
     case SHIFT_ERROR:
       return {
         ...state,
-        loading:false,
+        loading: false,
         error: action.payload,
       };
 
